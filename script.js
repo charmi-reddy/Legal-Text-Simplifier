@@ -1,34 +1,49 @@
 async function simplifyText() {
     const text = document.getElementById("legalText").value;
     const language = document.getElementById("language").value;
-    const apiUrl = "https://c84e-35-237-248-56.ngrok-free.app/simplify/";
 
     if (!text.trim()) {
         alert("Please enter legal text!");
         return;
     }
 
-    document.getElementById("loading").style.display = "block"; // Show loading text
-    document.getElementById("output").innerText = ""; // Clear previous output
+    document.getElementById("loading").style.display = "block"; 
+    document.getElementById("output").innerText = ""; 
 
     try {
-        const response = await fetch(apiUrl, {
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer YOUR_API_KEY_HERE"
             },
-            body: JSON.stringify({ text, language })
+            body: JSON.stringify({
+                model: "gpt-4o-mini",   // lighter, faster model
+                messages: [
+                    {
+                        role: "system",
+                        content: `You are a legal text simplifier and translator.`
+                    },
+                    {
+                        role: "user",
+                        content: `Simplify the following legal text and translate it into ${language}:\n\n${text}`
+                    }
+                ]
+            })
         });
 
         const data = await response.json();
-        if (data.translated_text) {
-            document.getElementById("output").innerText = "Simplified Text: " + data.translated_text;
+
+        if (data.choices && data.choices.length > 0) {
+            document.getElementById("output").innerText =
+                "Simplified Text: " + data.choices[0].message.content.trim();
         } else {
-            document.getElementById("output").innerText = "Error: " + (data.error || "Could not process request.");
+            document.getElementById("output").innerText = "Error: No response received.";
         }
     } catch (error) {
-        document.getElementById("output").innerText = "Error connecting to server.";
+        console.error(error);
+        document.getElementById("output").innerText = "Error connecting to OpenAI API.";
     } finally {
-        document.getElementById("loading").style.display = "none"; // Hide loading text
+        document.getElementById("loading").style.display = "none"; 
     }
 }
