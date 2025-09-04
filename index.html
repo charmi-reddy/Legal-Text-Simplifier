@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Text Simplifier</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Legal Text Simplifier & Translator</h2>
+
+    <div class="container">
+        <textarea id="legalText" placeholder="Enter legal text here..."></textarea><br>
+
+        <label for="language">Translate to:</label>
+        <select id="language">
+            <option value="English">English</option>
+            <option value="Hindi">Hindi (Uttar Pradesh, Bihar, etc.)</option>
+            <option value="Telugu">Telugu (Andhra Pradesh, Telangana)</option>
+            <option value="Tamil">Tamil (Tamil Nadu)</option>
+            <option value="Kannada">Kannada (Karnataka)</option>
+            <option value="Malayalam">Malayalam (Kerala)</option>
+            <option value="Marathi">Marathi (Maharashtra)</option>
+            <option value="Gujarati">Gujarati (Gujarat)</option>
+            <option value="Bengali">Bengali (West Bengal)</option>
+            <option value="Punjabi">Punjabi (Punjab)</option>
+            <option value="Odia">Odia (Odisha)</option>
+            <option value="Assamese">Assamese (Assam)</option>
+            <option value="Urdu">Urdu (Jammu & Kashmir, Telangana)</option>
+            <option value="Manipuri">Manipuri (Manipur)</option>
+            <option value="Bodo">Bodo (Assam, NE India)</option>
+            <option value="Kashmiri">Kashmiri (Jammu & Kashmir)</option>
+            <option value="Sindhi">Sindhi</option>
+            <option value="Nepali">Nepali (Sikkim, Darjeeling)</option>
+            <option value="Konkani">Konkani (Goa)</option>
+            <option value="Maithili">Maithili (Bihar, Jharkhand)</option>
+            <option value="Dogri">Dogri (Jammu & Kashmir)</option>
+            <option value="Sanskrit">Sanskrit</option>
+            <option value="Santali">Santali (Jharkhand, Odisha, WB)</option>
+        </select><br>
+
+        <button onclick="simplifyText()">Simplify & Translate</button>
+        <p id="loading">⏳ Processing... Please wait.</p>
+
+        <div id="output"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
